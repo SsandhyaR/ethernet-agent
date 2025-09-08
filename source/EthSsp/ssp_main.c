@@ -257,6 +257,11 @@ static int is_core_dump_opened(void)
 }
 #endif
 
+int function(int **p)
+{
+(*p)++;
+}
+
 int main(int argc, char* argv[])
 {
     BOOL                            bRunAsDaemon       = TRUE;
@@ -269,7 +274,9 @@ int main(int argc, char* argv[])
     DmErr_t    err;
     errno_t        rc = -1;
     int ind = -1;
-
+    int *ptr=malloc(sizeof(int));
+    function(&ptr);
+    free(ptr);
     // Buffer characters till newline for stdout and stderr
     setlinebuf(stdout);
     setlinebuf(stderr);
